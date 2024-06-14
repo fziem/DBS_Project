@@ -1,0 +1,28 @@
+version: '3.9'
+services:
+  php_apache:
+    image: gitlab.cvh-server.de:5050/lwolfram/s3_dbs_project:latest
+    build:
+      context: ./php_apache/
+    container_name: website
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+    - ./website:/var/www/html
+    - ./php_apache/php.ini-development:/usr/local/etc/php/php.ini
+    #- ./php_apache/php.ini-production:/usr/local/etc/php/php.ini
+
+  db:
+    image: postgres:alpine3.19
+    environment:
+      - "POSTGRES_PASSWORD=troll"
+    ports:
+      - "5432:5432"
+    volumes:
+    - ./database/db.sql:/docker-entrypoint-initdb.d/db.sql
+    
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"

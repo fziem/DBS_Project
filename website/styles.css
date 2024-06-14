@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+table {
+    width: 100%;
+}
+table th {
+    background-color: #202020;
+    color: #bada55;
+    padding: 10px;
+    text-align: left;
+}
+table td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+table tr:hover {
+    background-color: #e0e0e0;
+}
+
+div.navbar {
+    background-color:#202020;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    margin: 0;
+}
+div.navbarButtons {
+    display: flex;
+    padding-right: 3px;
+}
+
+.logo button {
+    background-color: unset;
+    color: #bada55;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: italic;
+}
+.logo button:hover {
+    background-color: unset;
+}
+
+.search-bar {
+    flex: 1; /* Füllt den verbleibenden Platz aus */
+    text-align: center; /* Zentriert den Inhalt horizontal */
+}
+
+.search-bar input[type="search"] {
+    padding: 8px 8px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 3px;
+}
+
+.search-bar input[type="search"]::placeholder {
+    color: white;
+}
+
+button {
+    padding: 8px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 3px;
+}
+
+button:hover {
+    background-color: #45a049;
+}

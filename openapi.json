@@ -1,0 +1,1798 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "troll library - OpenAPI",
+    "description": "documentation on Troll Library API",
+    "version": "0.4.5"
+  },
+  "servers": [
+    {
+      "url": "http://localhost/api/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "admin"
+    },
+    {
+      "name": "author"
+    },
+    {
+      "name": "book"
+    },
+    {
+      "name": "borrow"
+    },
+    {
+      "name": "holdback"
+    },
+    {
+      "name": "keyword"
+    },
+    {
+      "name": "publisher"
+    },
+    {
+      "name": "user"
+    }
+  ],
+  "paths": {
+    "/admin/disable-book": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "disable book by id",
+        "operationId": "adminDisableBook",
+        "parameters": [
+          {
+            "name": "bookID",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/admin/disable-user": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "disable user by id",
+        "operationId": "adminUserBook",
+        "parameters": [
+          {
+            "name": "userID",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/admin/enable-book": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Get user info, resolved by email",
+        "description": "",
+        "operationId": "adminEnableBook",
+        "parameters": [
+          {
+            "name": "BookID",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "403": {
+            "description": "unauthorised"
+          }
+        }
+      }
+    },
+    "/admin/enable-user": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Get user info, resolved by email",
+        "description": "",
+        "operationId": "adminEnableUser",
+        "parameters": [
+          {
+            "name": "UserID",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "unauthorised"
+          }
+        }
+      }
+    },
+    "/admin/get-user": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Get user info, resolved by email",
+        "description": "",
+        "operationId": "adminGetUser",
+        "parameters": [
+          {
+            "name": "Email",
+            "in": "query",
+            "description": "The Email for login",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserAd"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "unauthorised"
+          }
+        }
+      }
+    },
+    "/author/add-author-to-book": {
+      "put": {
+        "tags": [
+          "author"
+        ],
+        "summary": "add author to book",
+        "description": "link author to isbn",
+        "operationId": "authorAddToBook",
+        "requestBody": {
+          "description": "Created author object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ISBN": {
+                    "type": "integer"
+                  },
+                  "AuthorID": {
+                    "type": "integer"
+                  },
+                  "AuthorPrio": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/author/add-author": {
+      "put": {
+        "tags": [
+          "author"
+        ],
+        "summary": "Create author",
+        "description": "add new author",
+        "operationId": "authorAdd",
+        "requestBody": {
+          "description": "Created author object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "FirstName": {
+                    "type": "string"
+                  },
+                  "LastName": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/author/get-author-by-id": {
+      "post": {
+        "tags": [
+          "author"
+        ],
+        "summary": "returns array books",
+        "parameters": [
+          {
+            "name": "AuthorID",
+            "in": "query",
+            "description": "AuthorID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/author"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/author/get-author-by-isbn": {
+      "post": {
+        "tags": [
+          "author"
+        ],
+        "summary": "returns array books",
+        "parameters": [
+          {
+            "name": "ISBN",
+            "in": "query",
+            "description": "ISBN",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "AuthorID": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 10
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/author/query-author": {
+      "post": {
+        "tags": [
+          "author"
+        ],
+        "summary": "returns array books",
+        "parameters": [
+          {
+            "name": "Query",
+            "in": "query",
+            "description": "Search text for first or last name.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/author"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/book/add-book": {
+      "put": {
+        "tags": [
+          "book"
+        ],
+        "summary": "Create book",
+        "description": "add new book",
+        "operationId": "bookAdd",
+        "requestBody": {
+          "description": "Created book object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ISBN": {
+                    "type": "integer"
+                  },
+                  "Title": {
+                    "type": "string"
+                  },
+                  "PublisherID": {
+                    "type": "integer"
+                  },
+                  "Year": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/book/get-book-by-author": {
+      "post": {
+        "tags": [
+          "book"
+        ],
+        "summary": "returns array books",
+        "parameters": [
+          {
+            "name": "authorID",
+            "in": "query",
+            "description": "authorID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/book"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/book/get-book-by-id": {
+      "post": {
+        "tags": [
+          "book"
+        ],
+        "summary": "returns book by id",
+        "parameters": [
+          {
+            "name": "bookID",
+            "in": "query",
+            "description": "bookID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/book"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/book/get-book-by-keyword": {
+      "post": {
+        "tags": [
+          "book"
+        ],
+        "summary": "returns array books",
+        "parameters": [
+          {
+            "name": "keywordID",
+            "in": "query",
+            "description": "keywordID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/book"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/book/get-homepage-books": {
+      "post": {
+        "tags": [
+          "book"
+        ],
+        "summary": "returns array books",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/book"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/book/query-author": {
+      "post": {
+        "tags": [
+          "book"
+        ],
+        "summary": "returns array of authors",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "query string",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/book"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid search string"
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/book/query-books": {
+      "post": {
+        "tags": [
+          "book"
+        ],
+        "summary": "returns array books",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "query string",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/book"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid search string"
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/book/query-keyword": {
+      "post": {
+        "tags": [
+          "book"
+        ],
+        "summary": "returns array of keywords",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "query string",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/book"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid search string"
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/borrow/add": {
+      "put": {
+        "tags": [
+          "borrow"
+        ],
+        "summary": "Create borrow",
+        "description": "add new borrow",
+        "operationId": "borrowAdd",
+        "requestBody": {
+          "description": "Created user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "UserID": {
+                    "type": "integer"
+                  },
+                  "BookID": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/borrow/fetch-all": {
+      "post": {
+        "tags": [
+          "borrow"
+        ],
+        "summary": "get all borrows for logged in user",
+        "operationId": "borrowFetchAll",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "ID for fetch",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "UserID": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/borrow"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "unauthorised"
+          }
+        }
+      }
+    },
+    "/borrow/fetch": {
+      "post": {
+        "tags": [
+          "borrow"
+        ],
+        "summary": "get borrow by id",
+        "operationId": "borrowFetch",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "ID for fetch",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "UserID": {
+                  "type": "integer"
+                },
+                "BookID": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/borrow"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "unauthorised"
+          }
+        }
+      }
+    },
+    "/borrow/get-fine": {
+      "post": {
+        "tags": [
+          "borrow"
+        ],
+        "summary": "get borrow by id",
+        "operationId": "borrowGetFine",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "ID for fetch",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "UserID": {
+                  "type": "integer"
+                },
+                "BookID": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "Fine": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/borrow"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "403": {
+            "description": "unauthorised"
+          }
+        }
+      }
+    },
+    "/borrow/pay-fine": {
+      "post": {
+        "tags": [
+          "borrow"
+        ],
+        "summary": "get borrow by id",
+        "operationId": "borrowPayFine",
+        "parameters": [
+          {
+            "name": "borrowID",
+            "in": "query",
+            "description": "ID for Pickup",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "403": {
+            "description": "unauthorised"
+          }
+        }
+      }
+    },
+    "/holdback/add": {
+      "put": {
+        "tags": [
+          "holdback"
+        ],
+        "summary": "Create Holdback",
+        "description": "add new holdback",
+        "operationId": "HoldBackAdd",
+        "requestBody": {
+          "description": "Created user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "UserID": {
+                    "type": "integer"
+                  },
+                  "BookID": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/holdback/fetch-all": {
+      "post": {
+        "tags": [
+          "holdback"
+        ],
+        "summary": "get all holdbacks for logged in user",
+        "operationId": "holdbackFetchAll",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "ID for fetch",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "UserID": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/holdback"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "unauthorised"
+          }
+        }
+      }
+    },
+    "/holdback/fetch": {
+      "post": {
+        "tags": [
+          "holdback"
+        ],
+        "summary": "get holdback by id",
+        "operationId": "holdbackFetch",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "ID for fetch",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "UserID": {
+                  "type": "integer"
+                },
+                "BookID": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/holdback"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "unauthorised"
+          }
+        }
+      }
+    },
+    "/holdback/pickup": {
+      "post": {
+        "tags": [
+          "holdback"
+        ],
+        "summary": "get holdback by id",
+        "operationId": "holdbackPickup",
+        "parameters": [
+          {
+            "name": "HoldBackID",
+            "in": "query",
+            "description": "ID for Pickup",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "403": {
+            "description": "unauthorised"
+          }
+        }
+      }
+    },
+    "/keyword/get-keyword-by-id": {
+      "post": {
+        "tags": [
+          "keyword"
+        ],
+        "summary": "returns KeywordName, KeywordDesc",
+        "parameters": [
+          {
+            "name": "KeywordID",
+            "in": "query",
+            "description": "KeywordID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/keyword"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/keyword/get-keyword-by-isbn": {
+      "post": {
+        "tags": [
+          "keyword"
+        ],
+        "summary": "returns KeywordID",
+        "parameters": [
+          {
+            "name": "ISBN",
+            "in": "query",
+            "description": "ISBN",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "KeywordID": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/keyword/query-keyword": {
+      "post": {
+        "tags": [
+          "keyword"
+        ],
+        "summary": "gets keyword by search string",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "KeywordID": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/keyword/add-keyword-to-book": {
+      "put": {
+        "tags": [
+          "keyword"
+        ],
+        "summary": "adds Keyword to Book",
+        "parameters": [
+          {
+            "name": "ISBN",
+            "in": "query",
+            "description": "ISBN",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "KeywordID",
+            "in": "query",
+            "description": "KeywordID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/keyword/add-keyword": {
+      "put": {
+        "tags": [
+          "keyword"
+        ],
+        "summary": "creats Keyword",
+        "parameters": [
+          {
+            "name": "KeywordName",
+            "in": "query",
+            "description": "KeywordName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "KeywordDesc",
+            "in": "query",
+            "description": "KeywordDesc",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/publisher/add-publisher": {
+      "put": {
+        "tags": [
+          "publisher"
+        ],
+        "summary": "creats Publisher",
+        "parameters": [
+          {
+            "name": "KeywordName",
+            "in": "query",
+            "description": "PublisherName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/publisher/get-publisher-by-id": {
+      "post": {
+        "tags": [
+          "publisher"
+        ],
+        "summary": "returns PublisherID, PublisherName",
+        "parameters": [
+          {
+            "name": "PublisherID",
+            "in": "query",
+            "description": "PublisherID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "PublisherID": {
+                        "type": "integer"
+                      },
+                      "PublisherName": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/publisher/query-publisher": {
+      "post": {
+        "tags": [
+          "publisher"
+        ],
+        "summary": "gets publisher by search string",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "PublisherID": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/user/info": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get user info, userID resolved by session tolken",
+        "description": "",
+        "operationId": "getUserInfo",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "unauthorised"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateUser",
+        "requestBody": {
+          "description": "Update an existent user",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "403": {
+            "description": "unauthorised"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "deleteUser",
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "403": {
+            "description": "unauthorised"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Logs user into the system",
+        "description": "",
+        "operationId": "loginUser",
+        "parameters": [
+          {
+            "name": "Email",
+            "in": "query",
+            "description": "The Email for login",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "The password hashed in bcrypt",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "headers": {
+              "X-Expires-After": {
+                "description": "date in UTC when token expires",
+                "schema": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            },
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        }
+      }
+    },
+    "/user/logout": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Logs out current logged in user session",
+        "description": "",
+        "operationId": "logoutUser",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "403": {
+            "description": "unauthorised"
+          }
+        }
+      }
+    },
+    "/user/register": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Create user",
+        "description": "register as new user.",
+        "operationId": "createUser",
+        "requestBody": {
+          "description": "Created user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "UserID": {
+            "type": "integer",
+            "format": "int32",
+            "example": 10
+          },
+          "Email": {
+            "type": "string",
+            "example": "User@mail.com"
+          },
+          "Pass": {
+            "type": "string",
+            "example": "12345"
+          },
+          "FirstName": {
+            "type": "string",
+            "example": "John"
+          },
+          "LastName": {
+            "type": "string",
+            "example": "James"
+          },
+          "Phone": {
+            "type": "integer",
+            "format": "int64",
+            "example": 1234567890
+          },
+          "STR": {
+            "type": "string",
+            "example": "James"
+          },
+          "PLZ": {
+            "type": "string",
+            "example": "James"
+          }
+        }
+      },
+      "UserAd": {
+        "type": "object",
+        "properties": {
+          "UserID": {
+            "type": "integer",
+            "format": "int32",
+            "example": 10
+          },
+          "GroupID": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "Email": {
+            "type": "string",
+            "example": "User@mail.com"
+          },
+          "Pass": {
+            "type": "string",
+            "example": "12345"
+          },
+          "FirstName": {
+            "type": "string",
+            "example": "John"
+          },
+          "LastName": {
+            "type": "string",
+            "example": "James"
+          },
+          "Phone": {
+            "type": "integer",
+            "format": "int64",
+            "example": 1234567890
+          },
+          "STR": {
+            "type": "string",
+            "example": "James"
+          },
+          "PLZ": {
+            "type": "string",
+            "example": "James"
+          }
+        }
+      },
+      "book": {
+        "type": "object",
+        "properties": {
+          "BookID": {
+            "type": "integer",
+            "format": "int32",
+            "example": 10
+          },
+          "ISBN": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Title": {
+            "type": "string",
+            "example": "bible"
+          },
+          "PublisherID": {
+            "type": "integer",
+            "format": "int32",
+            "example": 123
+          },
+          "Year": {
+            "type": "integer",
+            "format": "int16",
+            "example": 2131
+          },
+          "isEnabled": {
+            "type": "boolean"
+          }
+        },
+        "xml": {
+          "name": "book"
+        }
+      },
+      "borrow": {
+        "type": "object",
+        "properties": {
+          "BorrowID": {
+            "type": "integer",
+            "format": "int32",
+            "example": 10
+          },
+          "BookID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "UserID": {
+            "type": "integer",
+            "format": "int32",
+            "example": 123
+          },
+          "BorrowDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "BorrowTime": {
+            "type": "integer",
+            "format": "int16",
+            "description": "borrow time in days",
+            "example": 30
+          },
+          "ReturnDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "FinePaid": {
+            "type": "boolean"
+          }
+        },
+        "xml": {
+          "name": "borrow"
+        }
+      },
+      "holdback": {
+        "type": "object",
+        "properties": {
+          "HoldBackID": {
+            "type": "integer",
+            "format": "int32",
+            "example": 10
+          },
+          "BookID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "UserID": {
+            "type": "integer",
+            "format": "int32",
+            "example": 123
+          },
+          "HoldBackDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "HoldBackTime": {
+            "type": "integer",
+            "format": "int16",
+            "description": "holdback time in days",
+            "example": 30
+          },
+          "IsPickedUp": {
+            "type": "boolean"
+          },
+          "BorrowID": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "xml": {
+          "name": "holdback"
+        }
+      },
+      "keyword": {
+        "type": "object",
+        "properties": {
+          "KeywordID": {
+            "type": "integer",
+            "format": "int32",
+            "example": 10
+          },
+          "KeywordName": {
+            "type": "string",
+            "example": "varchar(20)"
+          },
+          "KeywordDesc": {
+            "type": "string",
+            "example": "text"
+          }
+        },
+        "xml": {
+          "name": "keyword"
+        }
+      },
+      "author": {
+        "type": "object",
+        "properties": {
+          "AuthorID": {
+            "type": "integer",
+            "format": "int32",
+            "example": 10
+          },
+          "FirstName": {
+            "type": "string",
+            "example": "varchar(20)"
+          },
+          "LastName": {
+            "type": "string",
+            "example": "varchar(20)"
+          }
+        },
+        "xml": {
+          "name": "keyword"
+        }
+      }
+    },
+    "requestBodies": {
+      "UserArray": {
+        "description": "List of user object",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "app_auth": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://localhost/oauth/authorize",
+            "scopes": {
+              "write:user": "anything user related",
+              "read:user": "anything user related"
+            }
+          }
+        }
+      },
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      }
+    }
+  }
+}

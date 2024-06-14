@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User und Bücher Verwaltung</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="adminsite.js"></script>
+</head>
+<body>  
+    <h1>User und Bücher Verwaltung</h1>
+    <div class="Benutzerverwaltung">
+    <h2>Benutzerverwaltung</h2>
+    <form id="AddBorrow">
+        <h3>Add Borrow</h3>
+        <label for="UserID">UserID:</label>
+        <input type="text" id="UserID" name="UserID" required>
+        <label for="BookID">BookID:</label>
+        <input type="text" id="BookID" name="BookID" required>
+        <button type="submit" name="submit">Submit</button>
+    </form>
+    <form id="DeleteBorrow">
+        <h3>Delete Borrow</h3>
+        <label for="UserID">UserID:</label>
+        <input type="text" id="UserID" name="UserID" required>
+        <label for="BookID">BookID:</label>
+        <input type="text" id="BookID" name="BookID" required>
+        <button type="submit" name="submit">Submit</button>
+    </form>
+    <form id="PickupHoldback">
+        <h3>Pickup Holdback</h3>
+        <label for="UserID">UserID:</label>
+        <input type="text" id="UserID" name="UserID" required>
+        <label for="BookID">BookID:</label>
+        <input type="text" id="BookID" name="BookID" required>
+        <button type="submit" name="submit">Submit</button>
+    </form>
+    <form id="DisableUser">
+        <h3>Disable User</h3>
+        <label for="UserID">UserID:</label>
+        <input type="text" id="UserID" name="UserID" required>
+        <button type="submit" name="submit">Submit</button>
+    </form>
+    <form id="EnableUser">
+        <h3>Enable User</h3>
+        <label for="UserID">UserID:</label>
+        <input type="text" id="UserID" name="UserID" required>
+        <button type="submit" name="submit">Submit</button>
+    </form>
+    </div>
+    <div class="Bücherverwaltung">
+        <h2>Bücherverwaltung</h2>
+        <form id="AddBook">
+            <h3>Add Book</h3>
+            <label for="Title">Title:</label>
+            <input type="text" id="Title" name="Title" required>
+            <label for="Publisher">Publisher:</label>
+            <input type="text" id="Publisher" name="Publisher" required>
+            <label for="ISBN">ISBN:</label>
+            <input type="text" id="ISBN" name="ISBN" required>
+            <label for="Year">Year:</label>
+            <input type="text" id="Year" name="Year" required>
+            <label for="Author">Author:</label>
+            <input type="text" id="FirstName" name="FirstName" required>
+            <input type="text" id="LastName" name="LastName" required>
+            <label for="Keywords">Keywords:</label>
+            <input type="text" id="Keywords" name="Keywords" required>
+            <button type="submit" name="submit">Submit</button>
+        </form>
+        <form id="DisableBook">
+            <h3>Disable Book</h3>
+            <label for="BookID">BookID:</label>
+            <input type="text" id="BookID" name="BookID" required>
+            <button type="submit" name="submit">Submit</button>
+        </form>
+        <form id="EnableBook"> 
+        <h3>Enable Book</h3>
+        <label for="BookID">BookID:</label>
+        <input type="text" id="BookID" name="BookID" required>
+        <button type="submit" name="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

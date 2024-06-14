@@ -1,0 +1,1 @@
+docker exec s3_dbs_project-db-1 pg_dump -U postgres postgres > db.sql
